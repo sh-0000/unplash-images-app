@@ -1,0 +1,56 @@
+.toggle_container {
+  display: grid;
+  place-items: center end;
+  height: 72px;
+  font-size: var(--responsive--font-sm);
+}
+
+.toggle {
+  height: 1.5em;
+  width: 3em;
+  background: var(--text-colour);
+  border-radius: 1em;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  overflow: hidden;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+.toggle::before,
+.toggle::after {
+  content: "";
+  display: block;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  background: var(--bg-colour);
+  position: absolute;
+  inset: 0.25em;
+  transition: transform 300ms;
+}
+
+.toggle::before,
+.toggle:checked::after {
+  transition-timing-function: ease-out;
+  transition-delay: 0s;
+}
+
+.toggle:checked::before,
+.toggle::after {
+  transition-delay: 225ms;
+  transition-timing-function: cubic-bezier(0.3, 1.6, 0.5, 0.7);
+}
+
+.toggle::before {
+  transform: translateX(-150%);
+}
+
+.toggle:checked::before {
+  transform: translateX(150%);
+}
+
+.toggle:checked::after {
+  transform: translateX(300%);
+}
