@@ -1,0 +1,38 @@
+.search_section {
+  z-index: 9;
+}
+
+.title {
+  color: var(--clr-accent);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.search_form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: var(--default-border-radius);
+  background-color: hsl(0 0% 100%);
+}
+
+.search_form > * {
+  margin: 0.25em;
+  border-radius: var(--default-border-radius);
+}
+
+.search_input {
+  border: 0;
+  outline: 0;
+  margin-right: 0;
+  padding: 0 0.5em;
+  background: var(--clr-light);
+}
+
+.search_btn {
+  border: none;
+  background: var(--clr-accent);
+  color: var(--clr-light);
+  padding: 0.5em;
+}

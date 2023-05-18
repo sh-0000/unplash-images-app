@@ -1,0 +1,26 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 0.25rem;
+  z-index: 9;
+}
+
+.grid_item {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--default-border-radius);
+}
+
+.grid_item:nth-child(n + 10) {
+  animation: moveUp 800ms ease forwards;
+}
+
+@keyframes moveUp {
+  0% {
+    transform: translateY(200px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

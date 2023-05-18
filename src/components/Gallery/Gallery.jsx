@@ -1,8 +1,7 @@
 import { Fragment, useCallback, useRef } from "react";
 import axios from "axios";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useGlobalContext } from "../context";
-import Masonry from "react-masonry-css";
+import { useGlobalContext } from "../../context";
 
 const url = `https://api.unsplash.com/search/photos?client_id=${
   import.meta.env.VITE_API_KEY
@@ -17,19 +16,13 @@ const Gallery = () => {
     return res.data;
   };
 
-  const {
-    data,
-    status,
-    isLoading,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = useInfiniteQuery({
-    queryKey: ["images", searchTerm],
-    queryFn: fetchImages,
-    getNextPageParam: (lastPage, pages) =>
-      pages.length < lastPage.total_pages ? pages.length + 1 : undefined,
-  });
+  const { data, status, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useInfiniteQuery({
+      queryKey: ["images", searchTerm],
+      queryFn: fetchImages,
+      getNextPageParam: (lastPage, pages) =>
+        pages.length < lastPage.total_pages ? pages.length + 1 : undefined,
+    });
 
   const lastImageRef = useCallback(
     (image) => {
@@ -44,7 +37,7 @@ const Gallery = () => {
 
       if (image) intObserver.current.observe(image);
     },
-    [isLoading, hasNextPage]
+    [isFetchingNextPage, fetchNextPage, hasNextPage]
   );
 
   if (status === "loading") {
@@ -56,14 +49,9 @@ const Gallery = () => {
   }
 
   if (status === "success") {
-    const breakpointColumnsObj = {
-      default: 2,
-      1100: 3,
-      700: 2,
-      500: 1,
-    };
+    if (data?.pages[0].results.length < 1) return <h4>No images found...</h4>;
     return (
-      <section className="img_container">
+      <section className="grid">
         {data.pages.map((group, i) => {
           return (
             <Fragment key={i}>
@@ -73,7 +61,9 @@ const Gallery = () => {
                     key={item.id}
                     src={item.urls.regular}
                     alt={item.alt_description}
+                    loading="lazy"
                     ref={lastImageRef}
+                    className="grid_item"
                   />
                 );
               })}

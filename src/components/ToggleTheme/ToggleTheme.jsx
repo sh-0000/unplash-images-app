@@ -1,4 +1,3 @@
-import "./ToggleTheme.css";
 import { useGlobalContext } from "../../context";
 
 const ToggleTheme = () => {
@@ -11,6 +10,7 @@ const ToggleTheme = () => {
         defaultChecked={isDarkTheme}
         type="checkbox"
       />
+      <div className="curtain"></div>
     </section>
   );
 };

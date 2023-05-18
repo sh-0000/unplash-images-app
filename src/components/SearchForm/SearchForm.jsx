@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useGlobalContext } from "../context";
+import { useGlobalContext } from "../../context";
 
 const SearchForm = () => {
   const inputRef = useRef(null);
@@ -12,16 +12,16 @@ const SearchForm = () => {
     setSearchTerm(searchValue);
   };
   return (
-    <section>
+    <section className="search_section">
       <h1 className="title">Unplash Images</h1>
       <form onSubmit={handleSubmit} className="search_form">
         <input
           ref={inputRef}
-          placeholder="cat"
+          placeholder="office"
           type="text"
           className="search_input"
         />
-        <button type="submit" className="btn">
+        <button type="submit" className="search_btn">
           Search
         </button>
       </form>

@@ -8,12 +8,11 @@ const prefersDarkTheme =
 
 export const AppProvider = ({ children }) => {
   const [isDarkTheme, setIsDarkTheme] = useState(prefersDarkTheme);
-  const [searchTerm, setSearchTerm] = useState("cat");
+  const [searchTerm, setSearchTerm] = useState("office");
 
   const toggleTheme = () => setIsDarkTheme(!isDarkTheme);
 
   useEffect(() => {
-    document.body.className = isDarkTheme ? "dark" : "light";
     localStorage.setItem("darkTheme", isDarkTheme);
   }, [isDarkTheme]);
 
